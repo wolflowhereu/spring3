@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <property name="root_path" value="/tmp/logs/spring3"/>
+    <!--根据不同的环境 设置输出日志级别-->
+    <if condition='"pre".equals(property("spring.profiles.active")) || "online".equals(property("spring.profiles.active"))'>
+        <then>
+            <property name="log.level" value="warn"/>
+        </then>
+        <else>
+            <property name="log.level" value="debug"/>
+        </else>
+    </if>
+
+    <!-- 控制台LOG输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <pattern>[%date][%logger{10}][%level] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 默认log输出 -->
+    <!-- 按时间滚动的策略 -->
+    <!-- 保留 30天数据，默认无限-->
+    <appender name="console_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${root_path}/console.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${root_path}/console.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%date][%logger{10}][%level] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <!-- 错误log输出 -->
+    <!-- 按时间滚动的策略 -->
+    <!-- 保留 30天数据，默认无限-->
+    <appender name="error_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${root_path}/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${root_path}/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%date][%logger{10}] %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+
+    <!-- 警告log输出 -->
+    <!-- 按时间滚动的策略 -->
+    <!-- 保留 30天数据，默认无限-->
+    <appender name="warn_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${root_path}/warn.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${root_path}/warn.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%date][%logger{10}] %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- root -->
+    <root level="${log.level}">
+        <appender-ref ref="error_file"/>
+        <appender-ref ref="warn_file"/>
+        <appender-ref ref="console_file"/>
+        <appender-ref ref="console"/>
+    </root>
+
+</configuration>

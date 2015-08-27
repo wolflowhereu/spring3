@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <description>数据源配置</description>
+
+       <!-- 数据源配置,使用应用内的Tomcat JDBC连接池 -->
+       <bean id="dataSourceAbstract" class="org.apache.tomcat.jdbc.pool.DataSource"
+             destroy-method="close" abstract="true">
+              <property name="validationQuery" value="${jdbc.validationQuery}"/>
+              <!-- 连接Idle半个小时后超时，每10分钟检查一次 -->
+              <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>
+              <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>
+              <property name="testOnBorrow" value="${jdbc.testOnBorrow}"/>
+
+              <property name="initialSize" value="${jdbc.pool.initialSize}"/>
+              <property name="maxActive" value="${jdbc.pool.maxActive}"/>
+              <property name="maxIdle" value="${jdbc.pool.maxIdle}"/>
+
+              <property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}"/>
+              <property name="validationInterval" value="${jdbc.validationInterval}"/>
+              <property name="maxWait" value="${jdbc.maxWait}"/>
+
+       </bean>
+</beans>

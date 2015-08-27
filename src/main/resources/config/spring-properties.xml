@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans.xsd
+
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <description>统一配置不同环境文件加载</description>
+
+
+    <!--默认本地环境-->
+    <beans profile="default">
+        <context:property-placeholder
+                location="classpath*:properties/*.online.properties,classpath*:properties/*.test.properties,classpath*:properties/*.dev.properties,classpath*:properties/*.local.properties"
+                order="1"
+                ignore-unresolvable="true"
+                ignore-resource-not-found="true"/>
+    </beans>
+
+    <!--本地环境-->
+    <beans profile="local">
+        <context:property-placeholder
+                location="classpath*:properties/*.online.properties,classpath*:properties/*.test.properties,classpath*:properties/*.dev.properties,classpath*:properties/*.local.properties"
+                order="1"
+                ignore-unresolvable="true"
+                ignore-resource-not-found="true"/>
+    </beans>
+
+    <!--开发环境-->
+    <beans profile="dev">
+        <context:property-placeholder
+                location="classpath*:properties/*.online.properties,classpath*:properties/*.test.properties,classpath*:properties/*.dev.properties"
+                order="1"
+                ignore-unresolvable="true"
+                ignore-resource-not-found="true"/>
+    </beans>
+
+    <!--测试环境-->
+    <beans profile="test">
+        <context:property-placeholder
+                location="classpath*:properties/*.online.properties,classpath*:properties/*.test.properties"
+                order="1"
+                ignore-unresolvable="true"
+                ignore-resource-not-found="true"/>
+    </beans>
+
+
+    <!--预上线上环境-->
+    <beans profile="pre">
+        <context:property-placeholder
+                location="classpath*:properties/*.online.properties,classpath*:properties/*.pre.properties"
+                order="1"
+                ignore-unresolvable="true"
+                ignore-resource-not-found="true"/>
+    </beans>
+
+    <!--线上生产环境-->
+    <beans profile="online">
+        <context:property-placeholder
+                location="classpath*:properties/*.online.properties"
+                order="1"
+                ignore-unresolvable="true"
+                ignore-resource-not-found="true"/>
+    </beans>
+
+</beans>
+
