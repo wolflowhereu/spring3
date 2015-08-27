@@ -106,22 +106,18 @@
             <version>${jackson.version}</version>
         </dependency>
 
-
         <!-- Spring 配置-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
-
         <!--orm框架以及事务jdbc配置-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
-
-
         <!-- MySQL -->
         <dependency>
             <groupId>mysql</groupId>
@@ -134,8 +130,6 @@
             <artifactId>tomcat-jdbc</artifactId>
             <version>${tomcat-jdbc.version}</version>
         </dependency>
-
-
         <!-- mybatis-spring -->
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -161,7 +155,6 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
-
 
         <!-- 网络请求 -->
         <dependency>

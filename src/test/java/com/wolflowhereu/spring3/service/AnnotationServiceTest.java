@@ -1,21 +1,32 @@
 package com.wolflowhereu.spring3.service;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.*;
 
 /**
  * Created by jxdyf09 on 15-8-27.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ActiveProfiles("local")
 public class AnnotationServiceTest {
+
+    @Autowired
+    private AnnotationService annotationService;
 
     @Test
     public void testSayHello() throws Exception {
-
+        annotationService.sayHello();
     }
 
     @Test
     public void testInAnnotation() throws Exception {
-
+        annotationService.inAnnotation();
     }
 }
