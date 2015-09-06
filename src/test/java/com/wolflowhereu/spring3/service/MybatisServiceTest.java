@@ -11,8 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by jxdyf09 on 15-8-25.
  */
@@ -39,6 +37,7 @@ public class MybatisServiceTest {
         ids.add(3);
         ids.add(4);
         List<TestDB> dbs = mybatisService.selectByIds(ids);
+
         System.out.println(dbs.size());
     }
 

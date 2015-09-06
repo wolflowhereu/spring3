@@ -1,13 +1,14 @@
 package com.wolflowhereu.spring3.web;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.StrBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,5 +33,19 @@ public class DemoController {
         result.put("y", "i");
         result.put("中文", "乱码");
         return result;
+    }
+
+    @RequestMapping(value = "upload", method = RequestMethod.POST)
+    @ResponseBody
+    public String upload(MultipartFile file) throws IOException {
+        file.transferTo(new File("/tmp/" + file.getOriginalFilename()));
+        return "上传成功";
+    }
+
+
+    @RequestMapping(value = "upload.html")
+    public String upload() {
+
+        return "/upload";
     }
 }

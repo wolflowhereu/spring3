@@ -11,10 +11,12 @@
 
     <description>Spring公共配置</description>
 
-    <!-- 加载属性配置 -->
+    <!-- 引入统一属性配置 -->
     <import resource="classpath:config/spring-properties.xml"/>
-    <!-- 配置mybatis -->
+    <!-- 引入mybatis配置 -->
     <import resource="classpath:config/spring-mybatis.xml"/>
+    <!-- 引入redis配置 -->
+    <import resource="classpath:config/spring-redis.xml"/>
 
     <!-- 定义aspectj 切面 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
@@ -23,6 +25,8 @@
     <context:component-scan base-package="com.wolflowhereu.spring3.service"/>
     <!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
     <context:component-scan base-package="com.wolflowhereu.spring3.aop"/>
+    <!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
+    <context:component-scan base-package="com.wolflowhereu.spring3.common"/>
 
 
 </beans>
